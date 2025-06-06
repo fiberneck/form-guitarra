@@ -1,159 +1,236 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Formulário - Braço de Guitarra/Baixo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Solicitação de Orçamento FiberNeck</title>
   <style>
+    /* Reset básico */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #333;
+      margin: 0;
       padding: 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      align-items: center;
     }
+
     .form-container {
-      background-color: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      max-width: 900px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      max-width: 600px;
+      width: 100%;
+      transition: transform 0.3s ease;
     }
+
+    .form-container img {
+      display: inline-block;
+      margin-bottom: 20px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .form-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #2a5298;
+      letter-spacing: 1.2px;
     }
+
     fieldset {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      padding: 20px;
+      border: none;
+      margin-bottom: 25px;
+      padding: 0;
     }
+
     legend {
-      font-weight: bold;
-      padding: 0 10px;
+      font-size: 1.3em;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #1e3c72;
+      border-bottom: 2px solid #2a5298;
+      padding-bottom: 6px;
     }
+
     label {
       display: block;
-      margin-top: 10px;
-      font-weight: bold;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
     }
-    input, select {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+      padding: 12px 15px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
     }
-    .half {
-      width: 48%;
-      display: inline-block;
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus {
+      border-color: #1e3c72;
+      outline: none;
+      box-shadow: 0 0 8px rgba(30, 60, 114, 0.5);
     }
-    .half + .half {
-      margin-left: 4%;
+
+    .row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
+
+    .col-50 {
+      flex: 1 1 45%;
+      min-width: 200px;
+    }
+
     button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
+      background-color: #2a5298;
       color: white;
       border: none;
-      border-radius: 5px;
-      font-size: 16px;
+      padding: 15px;
+      font-size: 1.1em;
+      font-weight: 700;
+      border-radius: 10px;
       cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background-color: #1e3c72;
+    }
+
+    @media (max-width: 480px) {
+      .row {
+        flex-direction: column;
+      }
+      .col-50 {
+        min-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="form-container">
-  <h2>Formulário - Braço de Guitarra/Baixo</h2>
-  <form action="https://formspree.io/f/mzzgdrnp" method="POST">
-    
-    <fieldset>
-      <legend>Dados Pessoais</legend>
+  <div class="form-container">
+    <img src="fiberneck.jpg" alt="Logo FiberNeck">
+    <h2>Solicitação de Orçamento</h2>
+    <form action="https://formspree.io/f/mzzgdrnp" method="POST">
       
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
+      <fieldset>
+        <legend>Dados Pessoais</legend>
 
-      <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" name="endereco" required>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required />
 
-      <label for="celular">Celular:</label>
-      <input type="tel" id="celular" name="celular" required placeholder="(00) 00000-0000">
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required />
 
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" required>
-    </fieldset>
+        <label for="celular">Celular:</label>
+        <input type="tel" id="celular" name="celular" required placeholder="(00) 00000-0000" />
 
-    <fieldset>
-      <legend>Especificações</legend>
-      
-      <div class="half">
-        <label for="tipo">Tipo de braço:</label>
-        <select id="tipo" name="tipo" required>
-          <option value="">--Selecione--</option>
-          <option value="guitarra">Guitarra</option>
-          <option value="baixo">Baixo</option>
-        </select>
-      </div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required />
+      </fieldset>
 
-      <div class="half">
-        <label for="cordas">Número de cordas:</label>
-        <select id="cordas" name="cordas" required>
-          <option value="">--Selecione--</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-        </select>
-      </div>
+      <fieldset>
+        <legend>Especificações</legend>
 
-      <div class="half">
-        <label for="escala">Tamanho da escala (em polegadas):</label>
-        <input type="text" id="escala" name="escala" placeholder="Ex: 25.5" required>
-      </div>
+        <div class="row">
+          <div class="col-50">
+            <label for="tipo">Tipo de braço:</label>
+            <select id="tipo" name="tipo" required>
+              <option value="">--Selecione--</option>
+              <option value="guitarra">Guitarra</option>
+              <option value="baixo">Baixo</option>
+            </select>
+          </div>
 
-      <div class="half">
-        <label for="largura_nut">Largura do Nut (em mm):</label>
-        <input type="text" id="largura_nut" name="largura_nut" required>
-      </div>
+          <div class="col-50">
+            <label for="cordas">Número de cordas:</label>
+            <select id="cordas" name="cordas" required>
+              <option value="">--Selecione--</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </div>
+        </div>
 
-      <div class="half">
-        <label for="espessura_t1">Espessura no Traste 1 (em mm):</label>
-        <input type="text" id="espessura_t1" name="espessura_t1" required>
-      </div>
+        <div class="row">
+          <div class="col-50">
+            <label for="escala">Tamanho da escala (em pol):</label>
+            <input type="text" id="escala" name="escala" placeholder="Ex: 25.5" required />
+          </div>
 
-      <div class="half">
-        <label for="espessura_t12">Espessura no Traste 12 (em mm):</label>
-        <input type="text" id="espessura_t12" name="espessura_t12" required>
-      </div>
+          <div class="col-50">
+            <label for="largura_nut">Largura do Nut (em mm):</label>
+            <input type="text" id="largura_nut" name="largura_nut" required />
+          </div>
+        </div>
 
-      <div class="half">
-        <label for="material_escala">Material da escala:</label>
-        <select id="material_escala" name="material_escala" required>
-          <option value="">--Selecione--</option>
-          <option value="tw">TW</option>
-          <option value="richlite">Richlite</option>
-        </select>
-      </div>
+        <div class="row">
+          <div class="col-50">
+            <label for="espessura_t1">Espessura no Traste 1 (em mm):</label>
+            <input type="text" id="espessura_t1" name="espessura_t1" required />
+          </div>
 
-      <div class="half">
-        <label for="trastes">Tipo de trastes:</label>
-        <select id="trastes" name="trastes" required>
-          <option value="">--Selecione--</option>
-          <option value="niquel">Níquel</option>
-          <option value="inox">Inox</option>
-        </select>
-      </div>
-    </fieldset>
+          <div class="col-50">
+            <label for="espessura_t12">Espessura no Traste 12 (em mm):</label>
+            <input type="text" id="espessura_t12" name="espessura_t12" required />
+          </div>
+        </div>
 
-    <button type="submit">Enviar</button>
-  </form>
-</div>
+        <div class="row">
+          <div class="col-50">
+            <label for="material_escala">Material da escala:</label>
+            <select id="material_escala" name="material_escala" required>
+              <option value="">--Selecione--</option>
+              <option value="tw">TW</option>
+              <option value="richlite">Richlite</option>
+            </select>
+          </div>
+
+          <div class="col-50">
+            <label for="trastes">Tipo de trastes:</label>
+            <select id="trastes" name="trastes" required>
+              <option value="">--Selecione--</option>
+              <option value="niquel">Níquel</option>
+              <option value="inox">Inox</option>
+            </select>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 
 </body>
 </html>
