@@ -118,7 +118,15 @@
       width: 100%;
       transition: background-color 0.3s ease;
     }
-
+    .success-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 6px;
+    }
     button:hover {
       background-color: #1e3c72;
     }
@@ -229,8 +237,37 @@
       </fieldset>
 
       <button type="submit">Enviar</button>
+
+      <div id="mensagemSucesso" class="success-message">Formulário enviado com sucesso! Obrigado pelo contato.</div>
+
     </form>
   </div>
+
+  <script>
+    const formulario = document.getElementById("formulario");
+    const mensagemSucesso = document.getElementById("mensagemSucesso");
+
+    formulario.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const dados = new FormData(formulario);
+      fetch(formulario.action, {
+        method: formulario.method,
+        body: dados,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          formulario.reset();
+          mensagemSucesso.style.display = "block";
+        } else {
+          alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
+        }
+      }).catch(error => {
+        alert("Erro ao enviar: " + error);
+      });
+    });
+  </script>
 
 </body>
 </html>
