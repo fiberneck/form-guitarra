@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Formulário - Braço de Guitarra/Baixo</title>
   <style>
     body {
@@ -13,7 +13,7 @@
       background-color: #fff;
       padding: 25px;
       border-radius: 8px;
-      max-width: 600px;
+      max-width: 900px;
       margin: auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
@@ -23,9 +23,9 @@
     }
     fieldset {
       border: 1px solid #ccc;
-      padding: 15px 20px 20px;
+      border-radius: 5px;
       margin-bottom: 20px;
-      border-radius: 6px;
+      padding: 20px;
     }
     legend {
       font-weight: bold;
@@ -42,16 +42,13 @@
       margin-top: 5px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      box-sizing: border-box;
     }
-    .row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .half {
+      width: 48%;
+      display: inline-block;
     }
-    .row > div {
-      flex: 1 1 45%;
-      min-width: 150px;
+    .half + .half {
+      margin-left: 4%;
     }
     button {
       margin-top: 20px;
@@ -67,86 +64,92 @@
     button:hover {
       background-color: #0056b3;
     }
-    .note {
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 5px;
-    }
   </style>
 </head>
 <body>
 
 <div class="form-container">
-  <h2>Construção de Braço de Guitarra/Baixo</h2>
-  <form action="https://formspree.io/f/yourformid" method="POST">
+  <h2>Formulário - Braço de Guitarra/Baixo</h2>
+  <form action="https://formspree.io/f/mgeglwbw" method="POST">
+    
     <fieldset>
       <legend>Dados Pessoais</legend>
+      
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="Nome" required placeholder="Seu nome completo" />
+      <input type="text" id="nome" name="nome" required>
 
       <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" name="Endereço" required placeholder="Rua, número, bairro, cidade" />
+      <input type="text" id="endereco" name="endereco" required>
 
       <label for="celular">Celular:</label>
-      <input type="tel" id="celular" name="Celular" required placeholder="(00) 00000-0000" />
+      <input type="tel" id="celular" name="celular" required placeholder="(00) 00000-0000">
 
       <label for="email">E-mail:</label>
-      <input type="email" id="email" name="Email" required placeholder="seuemail@exemplo.com" />
-      <div class="note">Os dados serão enviados para: casegal@gmail.com</div>
+      <input type="email" id="email" name="email" required>
     </fieldset>
 
     <fieldset>
       <legend>Especificações</legend>
-
-      <label for="tipo">Tipo de braço:</label>
-      <select id="tipo" name="Tipo de braço" required>
-        <option value="">--Selecione--</option>
-        <option value="guitarra">Guitarra</option>
-        <option value="baixo">Baixo</option>
-      </select>
-
-      <label for="escala">Tamanho da escala (polegadas):</label>
-      <input type="text" id="escala" name="Tamanho da escala" placeholder="Ex: 25.5" required />
-
-      <div class="row">
-        <div>
-          <label for="cordas">Número de cordas:</label>
-          <input type="number" id="cordas" name="Número de cordas" min="4" max="12" placeholder="Ex: 6" required />
-        </div>
-        <div>
-          <label for="nut">Largura do Nut (mm):</label>
-          <input type="text" id="nut" name="Largura do Nut" placeholder="Ex: 42" required />
-        </div>
+      
+      <div class="half">
+        <label for="tipo">Tipo de braço:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="">--Selecione--</option>
+          <option value="guitarra">Guitarra</option>
+          <option value="baixo">Baixo</option>
+        </select>
       </div>
 
-      <div class="row">
-        <div>
-          <label for="espessuraT1">Espessura no Traste 1 (mm):</label>
-          <input type="text" id="espessuraT1" name="Espessura no T1" placeholder="Ex: 20" required />
-        </div>
-        <div>
-          <label for="espessuraT12">Espessura no Traste 12 (mm):</label>
-          <input type="text" id="espessuraT12" name="Espessura no T12" placeholder="Ex: 22" required />
-        </div>
+      <div class="half">
+        <label for="cordas">Número de cordas:</label>
+        <select id="cordas" name="cordas" required>
+          <option value="">--Selecione--</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
       </div>
 
-      <label for="materialEscala">Material da escala:</label>
-      <select id="materialEscala" name="Material da escala" required>
-        <option value="">--Selecione--</option>
-        <option value="TW">TW</option>
-        <option value="Richlite">Richlite</option>
-      </select>
+      <div class="half">
+        <label for="escala">Tamanho da escala (em polegadas):</label>
+        <input type="text" id="escala" name="escala" placeholder="Ex: 25.5" required>
+      </div>
 
-      <label for="trastes">Tipo de trastes:</label>
-      <select id="trastes" name="Tipo de trastes" required>
-        <option value="">--Selecione--</option>
-        <option value="Niquel">Niquel</option>
-        <option value="Inox">Inox</option>
-      </select>
+      <div class="half">
+        <label for="largura_nut">Largura do Nut (em mm):</label>
+        <input type="text" id="largura_nut" name="largura_nut" required>
+      </div>
+
+      <div class="half">
+        <label for="espessura_t1">Espessura no Traste 1 (em mm):</label>
+        <input type="text" id="espessura_t1" name="espessura_t1" required>
+      </div>
+
+      <div class="half">
+        <label for="espessura_t12">Espessura no Traste 12 (em mm):</label>
+        <input type="text" id="espessura_t12" name="espessura_t12" required>
+      </div>
+
+      <div class="half">
+        <label for="material_escala">Material da escala:</label>
+        <select id="material_escala" name="material_escala" required>
+          <option value="">--Selecione--</option>
+          <option value="tw">TW</option>
+          <option value="richlite">Richlite</option>
+        </select>
+      </div>
+
+      <div class="half">
+        <label for="trastes">Tipo de trastes:</label>
+        <select id="trastes" name="trastes" required>
+          <option value="">--Selecione--</option>
+          <option value="niquel">Níquel</option>
+          <option value="inox">Inox</option>
+        </select>
+      </div>
     </fieldset>
-
-    <!-- Campo para evitar spam -->
-    <input type="text" name="_gotcha" style="display:none" />
 
     <button type="submit">Enviar</button>
   </form>
