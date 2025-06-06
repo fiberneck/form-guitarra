@@ -154,7 +154,10 @@
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required />
 
-        <label for="endereco">Endereço:</label>
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+
+        <label for="endereco">Endereço:</label> 
         <input type="text" id="endereco" name="endereco" required />
 
         <label for="celular">Celular:</label>
@@ -267,7 +270,43 @@
         alert("Erro ao enviar: " + error);
       });
     });
-  </script>
+  
+  document.getElementById('cep').addEventListener('blur', function () {
+    const cep = this.value.replace(/\D/g, '');
+    if (cep.length !== 8) return;
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.erro) {
+          const endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+          document.getElementById('endereco').value = endereco;
+        } else {
+          alert('CEP não encontrado.');
+        }
+      })
+      .catch(() => alert('Erro ao buscar o CEP.'));
+  });
+
+
+  document.getElementById('cep').addEventListener('blur', function () {
+    const cep = this.value.replace(/\D/g, '');
+    if (cep.length !== 8) return;
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.erro) {
+          const endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+          document.getElementById('endereco').value = endereco;
+        } else {
+          alert('CEP não encontrado.');
+        }
+      })
+      .catch(() => alert('Erro ao buscar o CEP.'));
+  });
+
+</script>
 
 </body>
 </html>
