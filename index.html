@@ -151,19 +151,19 @@
       <fieldset>
         <legend>Dados Pessoais</legend>
 
-        <label for="nome">Nome:</label>
+        <label for="nome">Nome:<span style="color: red">*</span></label>
         <input type="text" id="nome" name="nome" required />
 
-        <label for="cep">CEP:</label>
+        <label for="cep">CEP:<span style="color: red">*</span></label>
         <input type="text" id="cep" name="cep" placeholder="00000-000" required>
 
-        <label for="endereco">Endereço:</label> 
+        <label for="endereco">Endereço:<span style="color: red">*</span></label> 
         <input type="text" id="endereco" name="endereco" required />
 
-        <label for="celular">Celular:</label>
+        <label for="celular">Celular:<span style="color: red">*</span></label>
         <input type="tel" id="celular" name="celular" required placeholder="(00) 00000-0000" />
 
-        <label for="email">E-mail:</label>
+        <label for="email">E-mail:<span style="color: red">*</span></label>
         <input type="email" id="email" name="email" required />
       </fieldset>
 
@@ -172,7 +172,7 @@
 
         <div class="row">
           <div class="col-50">
-            <label for="tipo">Tipo de braço:</label>
+            <label for="tipo">Tipo de braço:<span style="color: red">*</span></label>
             <select id="tipo" name="tipo" required>
               <option value="">--Selecione--</option>
               <option value="guitarra">Guitarra</option>
@@ -181,7 +181,7 @@
           </div>
 
           <div class="col-50">
-            <label for="cordas">Número de cordas:</label>
+            <label for="cordas">Número de cordas:<span style="color: red">*</span></label>
             <select id="cordas" name="cordas" required>
               <option value="">--Selecione--</option>
               <option value="4">4</option>
@@ -195,7 +195,7 @@
 
         <div class="row">
           <div class="col-50">
-            <label for="escala">Tamanho da escala (em pol):</label>
+            <label for="escala">Tamanho da escala (em pol):<span style="color: red">*</span></label>
             <input type="text" id="escala" name="escala" placeholder="Ex: 25.5" required />
           </div>
 
@@ -219,7 +219,7 @@
 
         <div class="row">
           <div class="col-50">
-            <label for="material_escala">Material da escala:</label>
+            <label for="material_escala">Material da escala:<span style="color: red">*</span></label>
             <select id="material_escala" name="material_escala" required>
               <option value="">--Selecione--</option>
               <option value="tw">Madeira</option>
@@ -228,7 +228,7 @@
           </div>
 
           <div class="col-50">
-            <label for="trastes">Tipo de trastes:</label>
+            <label for="trastes">Tipo de trastes:<span style="color: red">*</span></label>
             <select id="trastes" name="trastes" required>
               <option value="">--Selecione--</option>
               <option value="niquel">Níquel</option>
@@ -242,7 +242,7 @@
       <button type="submit">Enviar</button>
 
       <div id="mensagemSucesso" class="success-message">Formulário enviado com sucesso! Obrigado pelo contato.</div>
-
+      <p style="text-align:left; font-size: 0.9em; margin-top: 10px;">* Campos obrigatórios</p>
     </form>
   </div>
 
