@@ -5,140 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solicitação de Orçamento FiberNeck</title>
   <style>
-    /* Reset básico */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #333;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      align-items: center;
+      color: #333; margin: 0; padding: 20px;
+      display: flex; justify-content: center; min-height: 100vh; align-items: center;
     }
-
     .form-container {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 12px;
+      background: #fff; padding: 30px 40px; border-radius: 12px;
       box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      max-width: 600px;
-      width: 100%;
-      transition: transform 0.3s ease;
+      max-width: 600px; width: 100%; transition: transform 0.3s ease;
     }
-
-    .form-container img {
-      display: inline-block;
-      margin-bottom: 20px;
-      max-width: 100%;
-      height: auto;
+    .form-container img { display: inline-block; margin-bottom: 20px; max-width: 100%; height: auto; }
+    .form-container:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    h2 { text-align: center; margin-bottom: 25px; font-weight: 700; color: #2a5298; letter-spacing: 1.2px; }
+    fieldset { border: none; margin-bottom: 25px; padding: 0; }
+    legend { font-size: 1.3em; font-weight: 700; margin-bottom: 15px; color: #1e3c72; border-bottom: 2px solid #2a5298; padding-bottom: 6px; }
+    label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+    input[type="text"], input[type="email"], input[type="tel"], select {
+      width: 100%; padding: 12px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;
     }
-
-    .form-container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-weight: 700;
-      color: #2a5298;
-      letter-spacing: 1.2px;
-    }
-
-    fieldset {
-      border: none;
-      margin-bottom: 25px;
-      padding: 0;
-    }
-
-    legend {
-      font-size: 1.3em;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #1e3c72;
-      border-bottom: 2px solid #2a5298;
-      padding-bottom: 6px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #444;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    select {
-      width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      font-size: 1em;
-      transition: border-color 0.3s ease;
-    }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="tel"]:focus,
-    select:focus {
-      border-color: #1e3c72;
-      outline: none;
-      box-shadow: 0 0 8px rgba(30, 60, 114, 0.5);
-    }
-
-    .row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .col-50 {
-      flex: 1 1 45%;
-      min-width: 200px;
-    }
-
+    input:focus, select:focus { border-color: #1e3c72; outline: none; box-shadow: 0 0 8px rgba(30, 60, 114, 0.5); }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .col-50 { flex: 1 1 45%; min-width: 200px; }
     button {
-      background-color: #2a5298;
-      color: white;
-      border: none;
-      padding: 15px;
-      font-size: 1.1em;
-      font-weight: 700;
-      border-radius: 10px;
-      cursor: pointer;
-      width: 100%;
-      transition: background-color 0.3s ease;
+      background-color: #2a5298; color: white; border: none; padding: 15px;
+      font-size: 1.1em; font-weight: 700; border-radius: 10px; cursor: pointer; width: 100%; transition: background-color 0.3s ease;
     }
-    .success-message {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-      border-radius: 6px;
+    #calcularPreco {
+      margin-top: 25px;
+      margin-bottom: 15px;
     }
-    button:hover {
-      background-color: #1e3c72;
+    .success-message, .preco-message, .alert-message {
+      display: none; margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 0.95em;
     }
-
-    @media (max-width: 480px) {
-      .row {
-        flex-direction: column;
-      }
-      .col-50 {
-        min-width: 100%;
-      }
-    }
+    .success-message { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .preco-message { background-color: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }
+    .alert-message { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; font-weight: bold; text-align: center; }
+    button:hover { background-color: #1e3c72; }
+    @media (max-width: 480px) { .row { flex-direction: column; } .col-50 { min-width: 100%; } }
   </style>
 </head>
 <body>
@@ -147,32 +53,25 @@
     <img src="fiberneck.jpg" alt="Logo FiberNeck">
     <h2>Solicitação de Orçamento</h2>
     <form id="formulario" action="https://formspree.io/f/mzzgdrnp" method="POST">
-   
+      
       <fieldset>
         <legend>Dados Pessoais</legend>
-
         <label for="nome">Nome:<span style="color: red">*</span></label>
         <input type="text" id="nome" name="nome" required />
-
         <label for="cep">CEP:<span style="color: red">*</span></label>
         <input type="text" id="cep" name="cep" placeholder="00000-000" required>
-
         <label for="endereco">Endereço:<span style="color: red">*</span></label> 
         <input type="text" id="endereco" name="endereco" required />
-        
         <label for="complemento">Número/Complemento:</label> 
         <input type="text" id="complemento" name="complemento" />
-
         <label for="celular">Celular:<span style="color: red">*</span></label>
         <input type="tel" id="celular" name="celular" required placeholder="(00) 00000-0000" />
-
         <label for="email">E-mail:<span style="color: red">*</span></label>
         <input type="email" id="email" name="email" required />
       </fieldset>
 
       <fieldset>
         <legend>Especificações Preliminares</legend>
-
         <div class="row">
           <div class="col-50">
             <label for="tipo">Tipo de braço:<span style="color: red">*</span></label>
@@ -182,7 +81,6 @@
               <option value="baixo">Baixo</option>
             </select>
           </div>
-
           <div class="col-50">
             <label for="cordas">Número de cordas:<span style="color: red">*</span></label>
             <select id="cordas" name="cordas" required>
@@ -201,33 +99,12 @@
             <label for="escala">Tamanho da escala (em pol):<span style="color: red">*</span></label>
             <input type="text" id="escala" name="escala" placeholder="Ex: 25.5" required />
           </div>
-
-
           <div class="col-50">
             <label for="headless">Headless:</label>
             <input type="checkbox" id="headless" name="headless" />
           </div>
-          
-          <!--
-          <div class="col-50">
-            <label for="largura_nut">Largura do Nut (em mm):</label>
-            <input type="text" id="largura_nut" name="largura_nut" />
-          </div>
         </div>
 
-        <div class="row">
-          <div class="col-50">
-            <label for="espessura_t1">Espessura no Traste 1 (em mm):</label>
-            <input type="text" id="espessura_t1" name="espessura_t1" />
-          </div>
-
-          <div class="col-50">
-            <label for="espessura_t12">Espessura no Traste 12 (em mm):</label>
-            <input type="text" id="espessura_t12" name="espessura_t12" />
-          </div>
-        </div>
-
-        -->
         <div class="row">
           <div class="col-50">
             <label for="material_escala">Material da escala:<span style="color: red">*</span></label>
@@ -237,7 +114,6 @@
               <option value="richlite">Richlite</option>
             </select>
           </div>
-
           <div class="col-50">
             <label for="trastes">Tipo de trastes:<span style="color: red">*</span></label>
             <select id="trastes" name="trastes" required>
@@ -247,11 +123,13 @@
             </select>
           </div>
         </div>
-
+        <button type="button" id="calcularPreco">Calcular Preço Estimado</button>
+        <div id="precoEstimado" class="preco-message"></div>
+        <input type="hidden" id="precoHidden" name="preco_estimado" />
       </fieldset>
 
-      <button type="submit">Enviar</button>
-
+      <button type="submit" id="btnEnviar" disabled>Enviar</button>
+      <div id="alertaEnvio" class="alert-message">⚠️ Calcule o preço antes de enviar.</div>
       <div id="mensagemSucesso" class="success-message">Formulário enviado com sucesso! Obrigado pelo contato.</div>
       <p style="text-align:left; font-size: 0.9em; margin-top: 10px;">* Campos obrigatórios</p>
     </form>
@@ -260,64 +138,90 @@
   <script>
     const formulario = document.getElementById("formulario");
     const mensagemSucesso = document.getElementById("mensagemSucesso");
+    const precoDiv = document.getElementById("precoEstimado");
+    const btnEnviar = document.getElementById("btnEnviar");
+    const alertaEnvio = document.getElementById("alertaEnvio");
+    const precoHidden = document.getElementById("precoHidden");
+
+    // --- Tabela de preços configurável ---
+    const precos = {
+      base: 1400,
+      baixo: 500,
+      cordaExtra: 150,
+      escalaLonga: 200,
+      headless: 400,
+      material: {
+        tw: 0,
+        richlite: 350
+      },
+      trastes: {
+        niquel: 0,
+        inox: 300
+      }
+    };
 
     formulario.addEventListener("submit", function(event) {
       event.preventDefault();
       const dados = new FormData(formulario);
+      // Ajusta o valor para enviar formatado
+      if (precoHidden.value) {
+        dados.set("preco_estimado", `Preço estimado: R$ ${precoHidden.value}`);
+      }
       fetch(formulario.action, {
         method: formulario.method,
         body: dados,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       }).then(response => {
         if (response.ok) {
           formulario.reset();
           mensagemSucesso.style.display = "block";
+          precoDiv.style.display = "none";
+          alertaEnvio.style.display = "block";
+          btnEnviar.disabled = true;
         } else {
           alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
         }
-      }).catch(error => {
-        alert("Erro ao enviar: " + error);
-      });
+      }).catch(error => { alert("Erro ao enviar: " + error); });
     });
-  
-  document.getElementById('cep').addEventListener('blur', function () {
-    const cep = this.value.replace(/\D/g, '');
-    if (cep.length !== 8) return;
 
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.erro) {
-          const endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
-          document.getElementById('endereco').value = endereco;
-        } else {
-          alert('CEP não encontrado.');
-        }
-      })
-      .catch(() => alert('Erro ao buscar o CEP.'));
-  });
+    document.getElementById('cep').addEventListener('blur', function () {
+      const cep = this.value.replace(/\D/g, '');
+      if (cep.length !== 8) return;
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.erro) {
+            const endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+            document.getElementById('endereco').value = endereco;
+          } else { alert('CEP não encontrado.'); }
+        }).catch(() => alert('Erro ao buscar o CEP.'));
+    });
 
+    // --- Cálculo estimado de preço ---
+    document.getElementById("calcularPreco").addEventListener("click", () => {
+      let preco = precos.base;
+      const tipo = document.getElementById("tipo").value;
+      const cordas = parseInt(document.getElementById("cordas").value || 0);
+      const escala = parseFloat(document.getElementById("escala").value || 0);
+      const headless = document.getElementById("headless").checked;
+      const material = document.getElementById("material_escala").value;
+      const trastes = document.getElementById("trastes").value;
 
-  document.getElementById('cep').addEventListener('blur', function () {
-    const cep = this.value.replace(/\D/g, '');
-    if (cep.length !== 8) return;
+      if (tipo === "baixo") preco += precos.baixo;
+      preco += (cordas - 4) * precos.cordaExtra;
+      if (escala > 26) preco += precos.escalaLonga;
+      if (headless) preco += precos.headless;
+      preco += precos.material[material] || 0;
+      preco += precos.trastes[trastes] || 0;
 
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.erro) {
-          const endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
-          document.getElementById('endereco').value = endereco;
-        } else {
-          alert('CEP não encontrado.');
-        }
-      })
-      .catch(() => alert('Erro ao buscar o CEP.'));
-  });
+      precoDiv.innerText = `Preço estimado: R$ ${preco.toFixed(2)}`;
+      precoDiv.style.display = "block";
+      precoHidden.value = preco.toFixed(2);
 
-</script>
-
+      // Habilitar o botão de envio após cálculo
+      btnEnviar.disabled = false;
+      alertaEnvio.style.display = "none";
+    });
+  </script>
 </body>
 </html>
