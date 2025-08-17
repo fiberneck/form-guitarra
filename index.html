@@ -44,6 +44,16 @@
     .preco-message { background-color: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }
     .alert-message { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; font-weight: bold; text-align: center; }
     button:hover { background-color: #1e3c72; }
+    
+    /* Animação fade-in para o botão de envio */
+    #btnEnviar {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    #btnEnviar.mostrar {
+      opacity: 1;
+    }
+
     @media (max-width: 480px) { .row { flex-direction: column; } .col-50 { min-width: 100%; } }
   </style>
 </head>
@@ -123,12 +133,12 @@
             </select>
           </div>
         </div>
-        <button type="button" id="calcularPreco">Calcular Preço Estimado</button>
+        <button type="button" id="calcularPreco" disabled>Calcular Preço Estimado</button>
         <div id="precoEstimado" class="preco-message"></div>
         <input type="hidden" id="precoHidden" name="preco_estimado" />
       </fieldset>
 
-      <button type="submit" id="btnEnviar" disabled>Enviar</button>
+      <button type="submit" id="btnEnviar" style="display:none;">Enviar</button>
       <div id="alertaEnvio" class="alert-message">⚠️ Calcule o preço antes de enviar.</div>
       <div id="mensagemSucesso" class="success-message">Formulário enviado com sucesso! Obrigado pelo contato.</div>
       <p style="text-align:left; font-size: 0.9em; margin-top: 10px;">* Campos obrigatórios</p>
@@ -142,10 +152,11 @@
     const btnEnviar = document.getElementById("btnEnviar");
     const alertaEnvio = document.getElementById("alertaEnvio");
     const precoHidden = document.getElementById("precoHidden");
+    const btnCalcular = document.getElementById("calcularPreco");
 
     // --- Tabela de preços configurável ---
     const precos = {
-      base: 1500,
+      base: 1400,
       baixo: 500,
       cordaExtra: 150,
       escalaLonga: 200,
@@ -160,10 +171,26 @@
       }
     };
 
+    // Habilitar botão de cálculo apenas se os campos obrigatórios estiverem preenchidos
+    const camposObrigatorios = ["tipo", "cordas", "escala", "material_escala", "trastes"];
+    function verificarCampos() {
+      let todosPreenchidos = true;
+      camposObrigatorios.forEach(id => {
+        const campo = document.getElementById(id);
+        if (!campo.value || campo.value.trim() === "") {
+          todosPreenchidos = false;
+        }
+      });
+      btnCalcular.disabled = !todosPreenchidos;
+    }
+
+    camposObrigatorios.forEach(id => {
+      document.getElementById(id).addEventListener("input", verificarCampos);
+    });
+
     formulario.addEventListener("submit", function(event) {
       event.preventDefault();
       const dados = new FormData(formulario);
-      // Ajusta o valor para enviar formatado
       if (precoHidden.value) {
         dados.set("preco_estimado", `Preço estimado: R$ ${precoHidden.value}`);
       }
@@ -177,7 +204,9 @@
           mensagemSucesso.style.display = "block";
           precoDiv.style.display = "none";
           alertaEnvio.style.display = "block";
-          btnEnviar.disabled = true;
+          btnEnviar.style.display = "none";
+          btnEnviar.classList.remove("mostrar");
+          btnCalcular.disabled = true;
         } else {
           alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
         }
@@ -198,7 +227,7 @@
     });
 
     // --- Cálculo estimado de preço ---
-    document.getElementById("calcularPreco").addEventListener("click", () => {
+    btnCalcular.addEventListener("click", () => {
       let preco = precos.base;
       const tipo = document.getElementById("tipo").value;
       const cordas = parseInt(document.getElementById("cordas").value || 0);
@@ -218,8 +247,8 @@
       precoDiv.style.display = "block";
       precoHidden.value = preco.toFixed(2);
 
-      // Habilitar o botão de envio após cálculo
-      btnEnviar.disabled = false;
+      btnEnviar.style.display = "block";
+      setTimeout(() => btnEnviar.classList.add("mostrar"), 10);
       alertaEnvio.style.display = "none";
     });
   </script>
