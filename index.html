@@ -160,7 +160,7 @@
       baixo: 500,
       cordaExtra: 150,
       escalaLonga: 200,
-      headless: 400,
+      headless: 100,
       material: {
         tw: 0,
         richlite: 450
@@ -238,7 +238,7 @@
 
       if (tipo === "baixo") preco += precos.baixo;
       preco += (cordas - 4) * precos.cordaExtra;
-      if (escala > 26) preco += precos.escalaLonga;
+      if (escala > 27) preco += precos.escalaLonga;
       if (headless) preco += precos.headless;
       preco += precos.material[material] || 0;
       preco += precos.trastes[trastes] || 0;
