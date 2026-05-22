@@ -208,8 +208,6 @@
       const cordas = parseInt(document.getElementById("cordas").value || 0);
       const escala = parseFloat(document.getElementById("escala").value || 0);
       const headless = document.getElementById("headless").checked;
-      const material = document.getElementById("material_escala").value;
-      const trastes = document.getElementById("trastes").value;
 
       if (tipo === "baixo") preco += precos.baixo;
       preco += (cordas - 4) * precos.cordaExtra;
