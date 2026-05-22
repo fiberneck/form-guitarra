@@ -115,24 +115,6 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-50">
-            <label for="material_escala">Material da escala:<span style="color: red">*</span></label>
-            <select id="material_escala" name="material_escala" required>
-              <option value="">--Selecione--</option>
-              <option value="tw">Madeira</option>
-              <option value="richlite">Richlite</option>
-            </select>
-          </div>
-          <div class="col-50">
-            <label for="trastes">Tipo de trastes:<span style="color: red">*</span></label>
-            <select id="trastes" name="trastes" required>
-              <option value="">--Selecione--</option>
-              <option value="niquel">Níquel</option>
-              <option value="inox">Inox</option>
-            </select>
-          </div>
-        </div>
         
         <button type="button" id="calcularPreco" disabled>Calcular Preço Estimado</button>
         <div id="precoEstimado" class="preco-message"></div>
@@ -157,23 +139,15 @@
 
     // --- Tabela de preços configurável ---
     const precos = {
-      base: 2500,
+      base: 2750,
       baixo: 500,
       cordaExtra: 150,
       escalaLonga: 200,
       headless: 100,
-      material: {
-        tw: 0,
-        richlite: 450
-      },
-      trastes: {
-        niquel: 0,
-        inox: 200
-      }
     };
 
     // Habilitar botão de cálculo apenas se os campos obrigatórios estiverem preenchidos
-    const camposObrigatorios = ["tipo", "cordas", "escala", "material_escala", "trastes"];
+    const camposObrigatorios = ["tipo", "cordas", "escala"];
     function verificarCampos() {
       let todosPreenchidos = true;
       camposObrigatorios.forEach(id => {
@@ -241,8 +215,6 @@
       preco += (cordas - 4) * precos.cordaExtra;
       if (escala > 27) preco += precos.escalaLonga;
       if (headless) preco += precos.headless;
-      preco += precos.material[material] || 0;
-      preco += precos.trastes[trastes] || 0;
 
       precoDiv.innerText = `Preço estimado: R$ ${preco.toFixed(2)}`;
       precoDiv.style.display = "block";
