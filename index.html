@@ -176,7 +176,6 @@
     }
 
     tipoSelect.addEventListener("change", atualizarOpcoesCordas);
-    atualizarOpcoesCordas();
 
     // --- Tabela de preços configurável ---
     const precos = {
@@ -196,7 +195,7 @@
     };
 
     // Habilitar botão de cálculo apenas se os campos obrigatórios estiverem preenchidos
-    const camposObrigatorios = ["tipo", "cordas"];
+    const camposObrigatorios = ["tipo", "cordas", "escala"];
     function verificarCampos() {
       let todosPreenchidos = true;
       camposObrigatorios.forEach(id => {
@@ -213,6 +212,10 @@
       campo.addEventListener("input", verificarCampos);
       campo.addEventListener("change", verificarCampos);
     });
+
+    // Inicializa as opções de cordas depois que todas as variáveis
+    // e funções necessárias já foram declaradas.
+    atualizarOpcoesCordas();
 
     formulario.addEventListener("submit", function(event) {
       event.preventDefault();
